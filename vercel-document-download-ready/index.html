@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sample document images">
+  <title>Sample Documents</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#172033}
+    header{padding:36px 20px 20px;text-align:center}
+    h1{margin:0 0 8px;font-size:32px}
+    header p{margin:0;color:#667085}
+    main{max-width:1200px;margin:0 auto;padding:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+    .card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(16,24,40,.09);border:1px solid #e8ecf3}
+    .preview{width:100%;height:260px;object-fit:contain;background:#f8fafc;border-radius:12px}
+    .filename{font-weight:700;margin:14px 0 12px}
+    .actions{display:flex;gap:10px}
+    .btn{flex:1;text-align:center;text-decoration:none;border-radius:9px;padding:11px 14px;font-weight:700;cursor:pointer;border:0;font-size:14px}
+    .view{background:#eef2ff;color:#3046a8}
+    .download{background:#1769e0;color:#fff}
+    .download:hover{background:#0d55bd}
+    footer{text-align:center;padding:30px 20px;color:#667085;font-size:13px}
+    @media(max-width:480px){h1{font-size:26px}.grid{grid-template-columns:1fr}.preview{height:220px}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sample Documents</h1>
+    <p>View or download the sample document images.</p>
+  </header>
+
+  <main>
+    <section class="grid" id="documents"></section>
+  </main>
+
+  <footer>Sample document gallery</footer>
+
+  <script>
+    const documents = [
+      {name:"sample-1.jpg", title:"Sample Document 1"},
+      {name:"sample-2.jpg", title:"Sample Document 2"},
+      {name:"sample-3.jpg", title:"Sample Document 3"},
+      {name:"sample-4.jpg", title:"Sample Document 4"},
+      {name:"sample-5.jpg", title:"Sample Document 5"}
+    ];
+
+    const grid = document.getElementById("documents");
+
+    documents.forEach(doc => {
+      const path = `./images/${doc.name}`;
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <img class="preview" src="${path}" alt="${doc.title}" loading="lazy">
+        <div class="filename">${doc.title}</div>
+        <div class="actions">
+          <a class="btn view" href="${path}" target="_blank" rel="noopener">View</a>
+          <a class="btn download" href="${path}" download="${doc.name}">Download</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
